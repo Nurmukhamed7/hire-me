@@ -1,9 +1,9 @@
-import ProductCard from './components/ProductCard'
+import CategoryButtons from './components/CategoryButtons/Category Buttons'
 
 export default function Home() {
 	return (
-		<div>
-			<ProductCard />
-		</div>
+		<section>
+			<CategoryButtons />
+		</section>
 	)
 }
