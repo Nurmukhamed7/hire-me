@@ -11,5 +11,3 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-./backend/*.pyc
-backend/*.pyc
