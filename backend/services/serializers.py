@@ -1,18 +1,19 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField, SlugRelatedField
+from rest_framework import serializers
 from .models import Category, Service
 
 
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ['name', 'slug', 'created_at']
+        fields = ['id', 'name', 'slug', 'created_at', 'services_count']
+
+    services_count = serializers.IntegerField(read_only=True)
 
 class ServiceSerializer(ModelSerializer):
-    # category = SlugRelatedField(queryset=Category.objects.all(), slug_field='slug') # display the category name instead of the category ID
-
     class Meta:
         model = Service
-        fields = ['name', 'slug', 'description', 'created_at']
+        fields = ['name', 'slug', 'description', 'created_at', 'category']
 
     def create(self, validated_data):
         category_slug = self.context['category_id']
