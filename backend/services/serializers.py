@@ -1,18 +1,23 @@
 from rest_framework.serializers import ModelSerializer, StringRelatedField, SlugRelatedField
 from rest_framework import serializers
-from .models import Category, Service
+from .models import Category, Service, Work
 
+class WorkSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Work
+        fields = ['id', 'name', 'slug' ]
 
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ['id', 'name', 'slug', 'created_at', 'services_count']
+        fields = ['id', 'name', 'slug', 'services_count']
 
     services_count = serializers.IntegerField(read_only=True)
 
 class ServiceSerializer(ModelSerializer):
+    works = WorkSerializer(many=True, read_only=True)
     class Meta:
         model = Service
-        fields = ['id', 'name', 'slug', 'description', 'created_at', 'category']
+        fields = ['id', 'name', 'slug', 'category', 'works']
 
 
