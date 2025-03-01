@@ -24,8 +24,15 @@ class CategoryViewSet(ModelViewSet):
 
 
 class ServiceViewSet(ModelViewSet):
-    queryset = Service.objects.select_related('category').all()
     serializer_class = ServiceSerializer
+
+    def get_queryset(self):
+        queryset = Service.objects.all()
+        category_id=self.request.query_params.get('category_id')
+        if category_id is not None:
+            queryset = queryset.filter(category_id=category_id)
+
+        return queryset
 
     def get_serializer_context(self):
         return {'request': self.request}
