@@ -21,7 +21,7 @@ class Service(models.Model):
 
 
 class Work(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=256)
     slug = models.SlugField(unique=True)
     service = models.ForeignKey(Service, on_delete=models.CASCADE, related_name='works')
     description = models.TextField(blank=True, null=True)

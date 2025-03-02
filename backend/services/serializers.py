@@ -5,7 +5,7 @@ from .models import Category, Service, Work
 class WorkSerializer(serializers.ModelSerializer):
     class Meta:
         model = Work
-        fields = ['id', 'name', 'slug' ]
+        fields = ['id', 'name', 'slug', 'service']
 
 class CategorySerializer(ModelSerializer):
     class Meta:

@@ -5,6 +5,7 @@ from rest_framework_nested import routers
 router = routers.SimpleRouter()
 router.register('categories', views.CategoryViewSet)
 router.register('services', views.ServiceViewSet, basename='services')
+router.register('works', views.WorkViewSet)
 
 # categories_router = routers.NestedSimpleRouter(router, 'categories', lookup='category')
 # categories_router.register('services', views.ServiceViewSet, basename='category-services')

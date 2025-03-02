@@ -3,8 +3,8 @@ from rest_framework import status
 from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
-from .models import Category, Service
-from .serializers import CategorySerializer, ServiceSerializer
+from .models import Category, Service, Work
+from .serializers import CategorySerializer, ServiceSerializer, WorkSerializer
 
 
 class CategoryViewSet(ModelViewSet):
@@ -36,3 +36,8 @@ class ServiceViewSet(ModelViewSet):
 
     def get_serializer_context(self):
         return {'request': self.request}
+
+
+class WorkViewSet(ModelViewSet):
+    queryset = Work.objects.all()
+    serializer_class = WorkSerializer
