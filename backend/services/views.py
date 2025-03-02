@@ -41,3 +41,26 @@ class ServiceViewSet(ModelViewSet):
 class WorkViewSet(ModelViewSet):
     queryset = Work.objects.all()
     serializer_class = WorkSerializer
+
+    def list(self, request, *args, **kwargs):
+        slug = request.query_params.get("slug")
+        if not slug:
+            return super().list(request, *args, **kwargs)
+
+        # Get the work matching the slug
+        work = get_object_or_404(Work, slug=slug)
+
+        # Get the associated service and category
+        service = work.service
+        category = service.category
+
+        # Get all works related to the same service
+        works = Work.objects.filter(service=service).values("name", "slug")
+
+        return Response({
+            "category": {
+                "name": category.name,
+                "slug": category.slug
+            },
+            "works": list(works)
+        })
