@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from './components/Header/Header'
 import MobileNav from './components/Nav/Nav'
+import ReactQueryProvider from './config/QueryProvider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
@@ -20,11 +21,13 @@ export default function RootLayout({
 	return (
 		<html lang='en'>
 			<body>
-				<div className='max-w-[420px] mx-auto flex flex-col min-h-screen bg-white'>
-					<Header />
-					<main>{children}</main>
-					<MobileNav />
-				</div>
+				<ReactQueryProvider>
+					<div className='max-w-[420px] mx-auto flex flex-col min-h-screen bg-white'>
+						<Header />
+						<main>{children}</main>
+						<MobileNav />
+					</div>
+				</ReactQueryProvider>
 			</body>
 		</html>
 	)
