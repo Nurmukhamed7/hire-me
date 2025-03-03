@@ -5,6 +5,8 @@ backend/.env
 *.env
 ./frontend/.env
 ./backend/.env
+frontend/.env.*
+backend/.env.*
 
 # Ignore Python cache files
 __pycache__/
