@@ -1,0 +1,21 @@
+// entities/service/api/serviceApi.ts
+
+import axiosInstance from '@/shared/api/axiosClient'
+import { useQuery } from '@tanstack/react-query'
+
+// Fetch services for a specific category ID
+const fetchServices = async (categoryId: number) => {
+	const response = await axiosInstance.get(
+		`/catalogue/main/services?category_id=${categoryId}`
+	)
+	return response.data
+}
+
+// Custom hook to fetch services dynamically
+export const useServices = (categoryId: number | null) => {
+	return useQuery({
+		queryKey: ['services', categoryId], // Dynamic query key based on categoryId
+		queryFn: () => (categoryId ? fetchServices(categoryId) : null), // Fetch only if categoryId is provided
+		enabled: !!categoryId, // Enable the query only if categoryId is not null
+	})
+}

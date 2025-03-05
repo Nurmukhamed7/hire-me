@@ -1,8 +1,8 @@
+import ReactQueryProvider from '@/shared/providers/ReactQueryProvider'
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import Header from './components/Header/Header'
 import MobileNav from './components/Nav/Nav'
-import ReactQueryProvider from './config/QueryProvider'
 import './globals.css'
 
 const inter = Inter({ subsets: ['latin'] })
