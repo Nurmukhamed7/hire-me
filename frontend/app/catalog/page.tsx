@@ -1,10 +1,11 @@
-// app/catalog/page.tsx
-import CatalogPage from '@/features/catalog/ui/CatalogPage'
+import CategoryList from '@/components/CategoryList'
 
-export default function Catalog() {
+const CatalogPage = () => {
 	return (
 		<div>
-			<CatalogPage />
+			<CategoryList />
 		</div>
 	)
 }
+
+export default CatalogPage

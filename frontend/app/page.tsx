@@ -1,12 +1,10 @@
-import CategoryButtons from './components/CategoryButtons/Category Buttons'
+import { Button } from '@/components/ui/button'
 
-export default function Home() {
+export default function HomePage() {
 	return (
-		<>
-			<section>
-				<CategoryButtons />
-			</section>
-			<section></section>
-		</>
+		<div>
+			HomePage
+			<Button>Click me</Button>
+		</div>
 	)
 }
