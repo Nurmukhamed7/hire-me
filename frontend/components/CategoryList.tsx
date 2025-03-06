@@ -12,6 +12,7 @@ interface Category {
 	id: number
 	name: string
 	slug: string
+	services_count: number
 }
 
 const CategoryList = () => {
@@ -31,7 +32,12 @@ const CategoryList = () => {
 				{categories.map((category: Category) => (
 					<AccordionItem key={category.id} value={category.slug}>
 						<AccordionTrigger onClick={() => setSelectedCategory(category.id)}>
-							{category.name}
+							<div className='flex flex-col justify-between w-full'>
+								<span>{category.name}</span>
+								<span className='text-gray-500'>
+									{category.services_count} Категорий
+								</span>
+							</div>
 						</AccordionTrigger>
 						<AccordionContent>
 							{servicesLoading ? (
