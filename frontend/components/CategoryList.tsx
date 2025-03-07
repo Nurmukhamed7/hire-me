@@ -6,6 +6,7 @@ import {
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/accordion'
+import Link from 'next/link'
 import { useState } from 'react'
 
 interface Category {
@@ -13,6 +14,14 @@ interface Category {
 	name: string
 	slug: string
 	services_count: number
+}
+
+interface Service {
+	id: number
+	name: string
+	slug: string
+	category: number
+	works: []
 }
 
 const CategoryList = () => {
@@ -23,7 +32,7 @@ const CategoryList = () => {
 	const { data: services, isLoading: servicesLoading } =
 		useServices(selectedCategory)
 
-	if (isLoading) return <div>Loading...</div>
+	if (isLoading) return <div>Loading from CategoryList...</div>
 	if (isError) return <div>Error fetching categories</div>
 
 	return (
@@ -44,8 +53,15 @@ const CategoryList = () => {
 								<div>Loading services...</div>
 							) : services?.length ? (
 								<ul>
-									{services.map((service: { id: number; name: string }) => (
-										<li key={service.id}>{service.name}</li>
+									{services.map((service: Service) => (
+										<li key={service.id}>
+											<Link
+												href={`/service/${service.slug}`}
+												className='hover:underline'
+											>
+												{service.name}
+											</Link>
+										</li>
 									))}
 								</ul>
 							) : (
