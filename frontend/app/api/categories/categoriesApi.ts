@@ -1,5 +1,3 @@
-'use client'
-
 import axiosInstance from '@/utils/axiosInstance'
 import { useQuery } from '@tanstack/react-query'
 
@@ -27,6 +25,6 @@ export const useServices = (categoryId: number | null) => {
 		queryKey: ['services', categoryId],
 		queryFn: () => fetchServices(categoryId!),
 		enabled: !!categoryId, // Only fetch when categoryId is available
-		staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
+		// staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
 	})
 }

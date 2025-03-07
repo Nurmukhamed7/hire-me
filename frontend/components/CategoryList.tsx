@@ -1,11 +1,15 @@
 'use client'
-import { useCategories, useServices } from '@/app/api/categories/categoriesApi'
+import {
+	fetchCategories,
+	useServices,
+} from '@/app/api/categories/categoriesApi'
 import {
 	Accordion,
 	AccordionContent,
 	AccordionItem,
 	AccordionTrigger,
 } from '@/components/ui/accordion'
+import { useSuspenseQuery } from '@tanstack/react-query'
 import Link from 'next/link'
 import { useState } from 'react'
 
@@ -25,7 +29,15 @@ interface Service {
 }
 
 const CategoryList = () => {
-	const { data: categories, isLoading, isError, error } = useCategories()
+	const {
+		data: categories,
+		isLoading,
+		isError,
+	} = useSuspenseQuery({
+		queryKey: ['mainCategories'],
+		queryFn: fetchCategories,
+	})
+
 	const [selectedCategory, setSelectedCategory] = useState<number | null>(null)
 
 	// Fetch services when a category is clicked
@@ -38,7 +50,7 @@ const CategoryList = () => {
 	return (
 		<div className=''>
 			<Accordion type='single' collapsible>
-				{categories.map((category: Category) => (
+				{categories?.map((category: Category) => (
 					<AccordionItem key={category.id} value={category.slug}>
 						<AccordionTrigger onClick={() => setSelectedCategory(category.id)}>
 							<div className='flex flex-col justify-between w-full'>

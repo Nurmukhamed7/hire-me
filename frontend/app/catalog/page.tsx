@@ -1,9 +1,21 @@
 import CategoryList from '@/components/CategoryList'
+import { getQueryClient } from '@/lib/get-query-client'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import { fetchCategories } from '../api/categories/categoriesApi'
 
-const CatalogPage = () => {
+const CatalogPage = async () => {
+	const queryClient = getQueryClient()
+
+	await queryClient.prefetchQuery({
+		queryKey: ['mainCategories'],
+		queryFn: fetchCategories,
+	})
+
 	return (
 		<div>
-			<CategoryList />
+			<HydrationBoundary state={dehydrate(queryClient)}>
+				<CategoryList />
+			</HydrationBoundary>
 		</div>
 	)
 }
