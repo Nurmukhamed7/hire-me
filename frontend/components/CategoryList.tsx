@@ -55,7 +55,7 @@ const CategoryList = () => {
 						<AccordionTrigger onClick={() => setSelectedCategory(category.id)}>
 							<div className='flex flex-col justify-between w-full'>
 								<span>{category.name}</span>
-								<span className='text-gray-500'>
+								<span className='text-gray-500 text-xs font-normal'>
 									{category.services_count} Категорий
 								</span>
 							</div>
@@ -64,7 +64,7 @@ const CategoryList = () => {
 							{servicesLoading ? (
 								<div>Loading services...</div>
 							) : services?.length ? (
-								<ul>
+								<ul className='flex flex-col gap-4'>
 									{services.map((service: Service) => (
 										<li key={service.id}>
 											<Link
