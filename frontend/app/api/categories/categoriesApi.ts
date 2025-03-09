@@ -15,7 +15,7 @@ export const useCategories = () => {
 
 export const fetchServices = async (categoryId: number) => {
 	const { data } = await axiosInstance.get(
-		`/services?category_id=${categoryId}`
+		`/services/?category_id=${categoryId}`
 	)
 	return data
 }
@@ -26,5 +26,17 @@ export const useServices = (categoryId: number | null) => {
 		queryFn: () => fetchServices(categoryId!),
 		enabled: !!categoryId, // Only fetch when categoryId is available
 		// staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
+	})
+}
+
+export const fetchWorksBySlug = async (slug: string) => {
+	const { data } = await axiosInstance.get(`/works?slug=${slug}`)
+	return data
+}
+
+export const useWorksBySlug = (slug: string) => {
+	return useQuery({
+		queryKey: ['works', slug],
+		queryFn: () => fetchWorksBySlug(slug),
 	})
 }
