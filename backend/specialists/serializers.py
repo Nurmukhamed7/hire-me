@@ -17,8 +17,8 @@ class WorkSerializer(serializers.ModelSerializer):
 
 class SpecialistSerializer(serializers.ModelSerializer):
     # services = ServiceSerializer(many=True, read_only=True)  # Show full service info
-    works = WorkSerializer(many=True, read_only=True)
+    # works = WorkSerializer(many=True, read_only=True)
 
     class Meta:
         model = Specialist
-        fields = ['user', 'about', 'avatar_url', 'rating', 'nb_reviews', 'created_at', 'works']
+        fields = ['user', 'about', 'avatar_url', 'rating', 'nb_reviews', 'created_at']
