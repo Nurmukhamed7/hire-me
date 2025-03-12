@@ -1,7 +1,14 @@
 from django.urls import path
-from .views import SpecialistsByServiceView, SpecialistRegistrationView
+from . import views
+from rest_framework_nested import routers
 
-urlpatterns = [
-    path('services/<slug:slug>/specialists/', SpecialistsByServiceView.as_view()),
-    path('specialists/register/', SpecialistRegistrationView.as_view()),
-]
+
+router = routers.SimpleRouter()
+
+router.register('specialists', views.SpecialistsViewSet)
+
+urlpatterns = router.urls
+# urlpatterns = [
+#     path('services/<slug:slug>/specialists/', SpecialistsByServiceView.as_view()),
+#     path('specialists/register/', SpecialistRegistrationView.as_view()),
+# ]
