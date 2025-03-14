@@ -1,12 +1,10 @@
 from django.db import models
 from django.conf import settings
-from users.models import User
-from services.models import Service
 from services.models import Work
 from django.contrib import admin
 
 class Specialist(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='specialist_profile')
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='specialist_profile')
     about = models.TextField(blank=True, null=True)  # Specialist bio
     avatar_url = models.URLField(blank=True, null=True)  # Optional avatar
     work = models.ForeignKey(Work, on_delete=models.CASCADE, related_name='specialists')  # Works they provide

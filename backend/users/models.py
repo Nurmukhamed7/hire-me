@@ -10,7 +10,7 @@ class City(models.Model):
 
 class User(AbstractUser):
     phone = models.CharField(max_length=15, unique=True, null=True, blank=True)
-    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, related_name='residents')
+    city = models.ForeignKey(City, on_delete=models.SET_NULL, null=True, blank=True, related_name='residents')
 
     def __str__(self):
         return self.username
