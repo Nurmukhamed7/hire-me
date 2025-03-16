@@ -170,7 +170,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REST_FRAMEWORK = {
     'COERCE_DECIMAL_TO_STRING': False,
     'DEFAULT_AUTHENTICATION_CLASSES': (
-            'rest_framework_simplejwt.authentication.JWTAuthentication',
+            'users.authentication.CustomJWTAuthentication',
     ),
     # 'DEFAULT_PERMISSION_CLASSES': [
     #         'rest_framework.permissions.IsAuthenticated',
@@ -183,6 +183,12 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'users.User'
+AUTH_COOKIE_ACCESS_MAX_AGE = 60*5
+AUTH_COOKIE_REFRESH_MAX_AGE = 60*60*24
+AUTH_COOKIE_SECURE = os.getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
+AUTH_COOKIE_HTTP_ONLY = True
+AUTH_COOKIE_PATH = '/'
+AUTH_COOKIE_SAMESITE = 'None'
 
 # Register custom SERIALIZER from UserCreateSerializer
 DJOSER = {
@@ -197,4 +203,6 @@ DJOSER = {
         'current_user': 'users.serializers.UserSerializer',
     }
 }
+
+AUTH_COOKIE = 'access'
 

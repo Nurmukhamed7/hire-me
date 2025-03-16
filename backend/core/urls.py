@@ -26,6 +26,6 @@ urlpatterns = [
     path('api/', include('services.urls')),
     path('api/', include('specialists.urls')),
     path('auth/', include('djoser.urls')),
-    path('auth/', include('djoser.urls.jwt')),
+    path('auth/', include('users.urls')),
     path('__debug__/', include(debug_toolbar.urls)),
 ]
