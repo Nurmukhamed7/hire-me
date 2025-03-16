@@ -4,12 +4,14 @@ from rest_framework.generics import get_object_or_404
 from rest_framework.response import Response
 from rest_framework.viewsets import ModelViewSet
 from .models import Category, Service, Work
+from .permissions import isAdminOrReadOnly
 from .serializers import CategorySerializer, ServiceSerializer, WorkSerializer
 
 
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.annotate(services_count=Count('services')).all()
     serializer_class = CategorySerializer
+    permission_classes = [isAdminOrReadOnly]
 
     def destroy(self, request, *args, **kwargs):
         category = self.get_object()
@@ -25,6 +27,7 @@ class CategoryViewSet(ModelViewSet):
 
 class ServiceViewSet(ModelViewSet):
     serializer_class = ServiceSerializer
+    permission_classes = [isAdminOrReadOnly]
 
     def get_queryset(self):
         queryset = Service.objects.all()
@@ -41,6 +44,7 @@ class ServiceViewSet(ModelViewSet):
 class WorkViewSet(ModelViewSet):
     queryset = Work.objects.all()
     serializer_class = WorkSerializer
+    permission_classes = [isAdminOrReadOnly]
 
     def list(self, request, *args, **kwargs):
         slug = request.query_params.get("slug")
