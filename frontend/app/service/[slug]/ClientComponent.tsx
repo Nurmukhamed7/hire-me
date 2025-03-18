@@ -1,6 +1,7 @@
 'use client'
 
 import { useWorksBySlug } from '@/app/api/categories/categoriesApi'
+import Link from 'next/link'
 
 const ClientComponent = ({ slug }: { slug: string }) => {
 	const { data: worksData, isLoading } = useWorksBySlug(slug)
@@ -13,11 +14,17 @@ const ClientComponent = ({ slug }: { slug: string }) => {
 		<div>
 			<div className='bg-neutral-100'>
 				<h2>Filters:</h2>
-				{works.length > 0 ? (
-					works.map((work: any) => <div key={work.slug}>{work.name}</div>)
-				) : (
-					<p>No works found.</p>
-				)}
+				<div className='flex flex-col'>
+					{works.length > 0 ? (
+						works.map((work: any) => (
+							<Link href={work.slug} key={work.slug}>
+								{work.name}
+							</Link>
+						))
+					) : (
+						<p>No works found.</p>
+					)}
+				</div>
 			</div>
 		</div>
 	)
