@@ -122,15 +122,15 @@ elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
     }
 
 # Sending Email settings
-EMAIL_BACKEND = 'django_ses.SESBackend'
-DEFAULT_FROM_EMAIL = os.getenv('AWS_SES_FROM_EMAIL')
-
-AWS_SES_ACCESS_KEY_ID=os.getenv('AWS_SES_ACCESS_KEY_ID')
-AWS_SES_SECRET_ACCESS_KEY=os.getenv('AWS_SES_SECRET_ACCESS_KEY')
-AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
-AWS_SES_REGION_ENDPOINT = f'email.{AWS_SES_REGION_NAME}.amazonaws.com'
-AWS_SES_FROM_EMAIL = os.getenv('AWS_SES_FROM_EMAIL')
-USE_SES_V2 = True
+# EMAIL_BACKEND = 'django_ses.SESBackend'
+# DEFAULT_FROM_EMAIL = os.getenv('AWS_SES_FROM_EMAIL')
+#
+# AWS_SES_ACCESS_KEY_ID=os.getenv('AWS_SES_ACCESS_KEY_ID')
+# AWS_SES_SECRET_ACCESS_KEY=os.getenv('AWS_SES_SECRET_ACCESS_KEY')
+# AWS_SES_REGION_NAME = os.getenv('AWS_SES_REGION_NAME')
+# AWS_SES_REGION_ENDPOINT = f'email.{AWS_SES_REGION_NAME}.amazonaws.com'
+# AWS_SES_FROM_EMAIL = os.getenv('AWS_SES_FROM_EMAIL')
+# USE_SES_V2 = True
 
 DOMAIN = os.getenv('DOMAIN')
 SITE_NAME = 'Hire Me'
@@ -248,8 +248,8 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = [
 # Register custom SERIALIZER from UserCreateSerializer
 DJOSER = {
     'PASSWORD_RESET_CONFIRM_URL': 'password-reset/{uid}/{token}',
-    'SEND_ACTIVATION_EMAIL': True,
-    'ACTIVATION_URL': 'activation/{uid}/{token}',
+    # 'SEND_ACTIVATION_EMAIL': True,
+    # 'ACTIVATION_URL': 'activation/{uid}/{token}',
     'USER_CREATE_PASSWORD_RETYPE': True,
     'PASSWORD_RESET_CONFIRM_RETYPE': True,
     'TOKEN_MODEL': None,
