@@ -2,7 +2,7 @@ import axiosInstance from '@/utils/axiosInstance'
 import { useQuery } from '@tanstack/react-query'
 
 export const fetchCategories = async () => {
-	const { data } = await axiosInstance.get('/categories/')
+	const { data } = await axiosInstance.get('/api/categories/')
 	return data
 }
 
@@ -15,7 +15,7 @@ export const useCategories = () => {
 
 export const fetchServices = async (categoryId: number) => {
 	const { data } = await axiosInstance.get(
-		`/services/?category_id=${categoryId}`
+		`/api/services/?category_id=${categoryId}`
 	)
 	return data
 }
@@ -30,7 +30,7 @@ export const useServices = (categoryId: number | null) => {
 }
 
 export const fetchWorksBySlug = async (slug: string) => {
-	const { data } = await axiosInstance.get(`/works?slug=${slug}`)
+	const { data } = await axiosInstance.get(`/api/works?slug=${slug}`)
 	return data
 }
 
