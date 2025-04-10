@@ -1,4 +1,5 @@
 import Container from '@/components/Container'
+import { Setup } from '@/components/utils'
 import ReactQueryProvider from '@/lib/ReactQueryProvider'
 import CustomProvider from '@/store/provider'
 import type { Metadata } from 'next'
@@ -19,6 +20,7 @@ export default function RootLayout({
 			<body className='bg-[#faf8f2]'>
 				<CustomProvider>
 					<ReactQueryProvider>
+						<Setup />
 						<Container>{children}</Container>
 					</ReactQueryProvider>
 				</CustomProvider>
