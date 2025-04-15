@@ -1,5 +1,5 @@
+import axios from 'axios'
 import { toast } from 'react-toastify'
-import { axiosInstanceAuth } from './axiosInstance'
 
 export default async function continueWithSocialAuth(
 	provider: string,
@@ -11,12 +11,19 @@ export default async function continueWithSocialAuth(
 				? process.env.NEXT_PUBLIC_REDIRECT_URL
 				: 'http://localhost:3000'
 
-		const url = `/auth/o/${provider}/?redirect_uri=${redirectUri}/auth/${redirect}`
+		const url = `${process.env.NEXT_PUBLIC_API_BASE_URL}/auth/o/${provider}/?redirect_uri=${redirectUri}/auth/${redirect}`
 
-		const res = await axiosInstanceAuth.get(url)
+		const res = await axios.get(url, {
+			headers: {
+				Accept: 'application/json',
+			},
+			withCredentials: true,
+		})
+
+		const data = res.data
 
 		if (res.status === 200 && typeof window !== 'undefined') {
-			window.location.replace(res.data.authorization_url)
+			window.location.replace(data.authorization_url)
 		} else {
 			toast.error('Something went wrong')
 		}
@@ -24,6 +31,3 @@ export default async function continueWithSocialAuth(
 		toast.error('Something went wrong')
 	}
 }
-
-export const continueWithGoogle = () =>
-	continueWithSocialAuth('google-oauth2', 'google')

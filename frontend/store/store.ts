@@ -1,15 +1,22 @@
-import { configureStore } from '@reduxjs/toolkit'
-import authReducer from './features/authSlice'
+import { mountStoreDevtool } from 'simple-zustand-devtools'
+import { create } from 'zustand'
 
-export const makeStore = () => {
-	return configureStore({
-		reducer: {
-			auth: authReducer,
-		},
-		devTools: process.env.NODE_ENV !== 'production',
-	})
+interface AuthState {
+	isAuthenticated: boolean
+	isLoading: boolean
+	setAuth: () => void
+	logout: () => void
+	finishInitialLoad: () => void
 }
 
-export type AppStore = ReturnType<typeof makeStore>
-export type RootState = ReturnType<AppStore['getState']>
-export type AppDispatch = AppStore['dispatch']
+export const useAuthStore = create<AuthState>(set => ({
+	isAuthenticated: false,
+	isLoading: true,
+	setAuth: () => set({ isAuthenticated: true }),
+	logout: () => set({ isAuthenticated: false }),
+	finishInitialLoad: () => set({ isLoading: false }),
+}))
+
+if (process.env.NODE_ENV === 'development') {
+	mountStoreDevtool('Store', useAuthStore)
+}

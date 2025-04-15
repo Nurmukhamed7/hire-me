@@ -1,6 +1,6 @@
 'use client'
 
-import { continueWithGoogle } from '@/utils/continue-with-social-auth'
+import { continueWithGoogle } from '@/utils'
 import SocialButton from './SocialButton'
 
 const SocialButtons = () => {
