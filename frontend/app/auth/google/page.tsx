@@ -1,7 +1,7 @@
 'use client'
 
-import { getUser, socialAuthenticate } from '@/store/authApi'
-import { useAuthStore } from '@/store/store'
+import { getUser, socialAuthenticate } from '@/services/auth.service'
+import { useAuthStore } from '@/store'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import { toast } from 'react-toastify'

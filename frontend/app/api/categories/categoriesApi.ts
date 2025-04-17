@@ -1,4 +1,4 @@
-import axiosInstance from '@/utils/axiosInstance'
+import { axiosInstance } from '@/lib/axios'
 import { useQuery } from '@tanstack/react-query'
 
 export const fetchCategories = async () => {

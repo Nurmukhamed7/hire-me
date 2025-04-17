@@ -1,5 +1,5 @@
-import { getUser } from '@/store/authApi'
-import { useAuthStore } from '@/store/store'
+import { getUser } from '@/services/auth.service'
+import { useAuthStore } from '@/store'
 import { useEffect } from 'react'
 
 export const useVerify = () => {
