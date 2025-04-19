@@ -29,7 +29,7 @@ class ServiceAdmin(admin.ModelAdmin):
     list_filter = ['category', 'category__slug']
     list_select_related = ['category']
     inlines = [WorkInline]
-    search_fields = ['name__istartswith', 'slug__istartswith']
+    search_fields = ['name__icontains', 'slug__icontains']
 
     def category_slug(selfself, service):
         return service.category.slug
@@ -42,7 +42,7 @@ class CategoryAdmin(admin.ModelAdmin):
         "slug": ["name"]
     }
     list_display = ['name', 'slug', 'services_count']
-    search_fields = ['name__istartswith', 'slug__istartswith']
+    search_fields = ['name__icontains', 'slug__icontains']
 
     @admin.display(ordering='services_count')
     def services_count(selfself, category):
@@ -66,4 +66,4 @@ class WorkAdmin(admin.ModelAdmin):
     }
     list_display = ['name', 'slug', 'service']
     list_filter = ['service']
-    search_fields = ['name__istartswith', 'slug__istartswith']
+    search_fields = ['name__icontains', 'slug__icontains']

@@ -6,6 +6,8 @@ from rest_framework.viewsets import ModelViewSet
 from .models import Category, Service, Work
 from .permissions import isAdminOrReadOnly
 from .serializers import CategorySerializer, ServiceSerializer, WorkSerializer
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.filters import SearchFilter
 
 
 class CategoryViewSet(ModelViewSet):
@@ -45,6 +47,8 @@ class WorkViewSet(ModelViewSet):
     queryset = Work.objects.all()
     serializer_class = WorkSerializer
     permission_classes = [isAdminOrReadOnly]
+    filter_backends = [DjangoFilterBackend, SearchFilter]
+    search_fields = ['name']
 
     def list(self, request, *args, **kwargs):
         slug = request.query_params.get("slug")
