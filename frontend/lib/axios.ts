@@ -12,7 +12,6 @@ axiosInstance.interceptors.response.use(
 		const originalRequest = error.config as AxiosRequestConfig & {
 			_retry?: boolean
 		}
-		console.log('originalRequest', originalRequest)
 		if (error.response?.status === 401 && !originalRequest._retry) {
 			originalRequest._retry = true
 			try {
