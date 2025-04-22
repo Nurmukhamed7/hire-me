@@ -39,6 +39,11 @@ class ServiceViewSet(ModelViewSet):
 
         return queryset
 
+    def list(self, request, *args, **kwargs):
+        if not request.query_params.get('category_id'):
+            return Response({'error': 'You must provide category_id to list services.'}, status=status.HTTP_400_BAD_REQUEST)
+        return super().list(request, *args, **kwargs)
+
     def get_serializer_context(self):
         return {'request': self.request}
 
@@ -52,23 +57,31 @@ class WorkViewSet(ModelViewSet):
 
     def list(self, request, *args, **kwargs):
         slug = request.query_params.get("slug")
-        if not slug:
+        search = request.query_params.get("search")
+
+        if slug:
+            # Get the work matching the slug
+            work = get_object_or_404(Work, slug=slug)
+
+            # Get the associated service and category
+            service = work.service
+            category = service.category
+
+            # Get all works related to the same service
+            works = Work.objects.filter(service=service).values("name", "slug")
+
+            return Response({
+                "category": {
+                    "name": category.name,
+                    "slug": category.slug
+                },
+                "works": list(works)
+            })
+
+        if search:
             return super().list(request, *args, **kwargs)
 
-        # Get the work matching the slug
-        work = get_object_or_404(Work, slug=slug)
-
-        # Get the associated service and category
-        service = work.service
-        category = service.category
-
-        # Get all works related to the same service
-        works = Work.objects.filter(service=service).values("name", "slug")
-
-        return Response({
-            "category": {
-                "name": category.name,
-                "slug": category.slug
-            },
-            "works": list(works)
-        })
+        return Response(
+            {'error': 'Provide either slug or search parameter to list works.'},
+            status=status.HTTP_400_BAD_REQUEST
+        )
