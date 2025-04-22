@@ -53,7 +53,7 @@ class WorkViewSet(ModelViewSet):
     serializer_class = WorkSerializer
     permission_classes = [isAdminOrReadOnly]
     filter_backends = [DjangoFilterBackend, SearchFilter]
-    search_fields = ['name']
+    search_fields = ['name', 'service__name']
 
     def list(self, request, *args, **kwargs):
         slug = request.query_params.get("slug")
@@ -79,7 +79,8 @@ class WorkViewSet(ModelViewSet):
             })
 
         if search:
-            return super().list(request, *args, **kwargs)
+            queryset = self.filter_queryset(self.get_queryset())[:11]
+            return Response(list(queryset.values('name', 'slug')))
 
         return Response(
             {'error': 'Provide either slug or search parameter to list works.'},
