@@ -8,7 +8,7 @@ interface IProps {
 
 const SocialButton = ({ provider, children, ...rest }: IProps) => {
 	return (
-		<Button {...rest} className='hover:cursor-pointer '>
+		<Button variant={'secondary'} size={'lg'} {...rest} className='w-full'>
 			{children}
 		</Button>
 	)

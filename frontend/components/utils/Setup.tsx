@@ -6,5 +6,11 @@ import { ToastContainer } from 'react-toastify'
 export default function Setup() {
 	useVerify()
 
-	return <ToastContainer />
+	return (
+		<ToastContainer
+			position='top-center'
+			autoClose={3000}
+			pauseOnHover={false}
+		/>
+	)
 }

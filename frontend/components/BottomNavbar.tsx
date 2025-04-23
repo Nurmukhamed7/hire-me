@@ -38,14 +38,14 @@ const BottomNavbar = () => {
 			</Link>
 
 			<Link
-				href='/'
+				href='/work'
 				className={`flex flex-col items-center text-xs gap-1 transition-colors ${
-					pathname === '/' ? 'text-white' : 'text-gray-400'
+					pathname === '/work' ? 'text-white' : 'text-gray-400'
 				}`}
 			>
 				<BriefcaseBusiness
 					className={`w-7 h-7 ${
-						pathname === '/' ? 'text-white' : 'text-gray-400'
+						pathname === '/work' ? 'text-white' : 'text-gray-400'
 					}`}
 				/>
 				<span className='text-[10px]'>Работа</span>
