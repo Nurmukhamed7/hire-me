@@ -1,6 +1,3 @@
-// app/profile/loading.tsx
-'use client'
-
 import { Skeleton } from '@/components/ui/skeleton'
 
 export default function LoadingPage() {
