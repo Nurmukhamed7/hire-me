@@ -1,12 +1,11 @@
 import { Button } from './ui/button'
 
-interface IProps {
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	provider: 'google'
-	children: React.ReactNode // Для переданных детей
-	[rest: string]: any
+	children: React.ReactNode
 }
 
-const SocialButton = ({ provider, children, ...rest }: IProps) => {
+const SocialButton = ({ children, ...rest }: IProps) => {
 	return (
 		<Button variant={'secondary'} size={'lg'} {...rest} className='w-full'>
 			{children}

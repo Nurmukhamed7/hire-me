@@ -7,7 +7,7 @@ import { useAuthStore } from '@/store'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { toast } from 'react-toastify'
 
-const page = () => {
+const ProfilePage = () => {
 	const queryClient = useQueryClient()
 	const logout = useAuthStore(s => s.logout)
 
@@ -59,4 +59,4 @@ const page = () => {
 	)
 }
 
-export default page
+export default ProfilePage

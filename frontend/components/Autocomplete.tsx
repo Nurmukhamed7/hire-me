@@ -46,10 +46,10 @@ export function AutoComplete<T extends string>({
 		[items]
 	)
 
-	const reset = () => {
-		onSelectedValueChange('' as T)
-		onSearchValueChange('')
-	}
+	// const reset = () => {
+	// 	onSelectedValueChange('' as T)
+	// 	onSearchValueChange('')
+	// }
 
 	const onSelectItem = (inputValue: string) => {
 		if (inputValue !== selectedValue) {

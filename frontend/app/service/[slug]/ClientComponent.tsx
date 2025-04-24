@@ -3,6 +3,11 @@
 import { useWorksBySlug } from '@/app/api/categories/categoriesApi'
 import Link from 'next/link'
 
+type Work = {
+	name: string
+	slug: string
+}
+
 const ClientComponent = ({ slug }: { slug: string }) => {
 	const { data: worksData, isLoading } = useWorksBySlug(slug)
 
@@ -16,7 +21,7 @@ const ClientComponent = ({ slug }: { slug: string }) => {
 				<h2>Filters:</h2>
 				<div className='flex flex-col'>
 					{works.length > 0 ? (
-						works.map((work: any) => (
+						works.map((work: Work) => (
 							<Link href={work.slug} key={work.slug}>
 								{work.name}
 							</Link>

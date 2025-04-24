@@ -7,6 +7,11 @@ import { useState } from 'react'
 import { useDebounce } from 'use-debounce'
 import { AutoComplete } from './Autocomplete'
 
+interface ISearchQuery {
+	name: string
+	slug: string
+}
+
 const SearchBar = () => {
 	const [searchValue, setSearchValue] = useState<string>('')
 	const [selectedValue, setSelectedValue] = useState<string>('')
@@ -21,7 +26,7 @@ const SearchBar = () => {
 	})
 
 	const items =
-		data?.map((item: any) => ({
+		data?.map((item: ISearchQuery) => ({
 			value: item.slug,
 			label: item.name,
 		})) ?? []
