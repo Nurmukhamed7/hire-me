@@ -22,10 +22,10 @@ const ProfilePage = () => {
 		onSuccess: () => {
 			logout()
 			queryClient.clear()
-			toast.success('Вы успешно вышли из системы')
+			toast.success('Logged out successfully!')
 		},
 		onError: () => {
-			toast.error('Произошла ошибка при выходе')
+			toast.error('Logout failed. Please try again.')
 		},
 	})
 
@@ -46,8 +46,9 @@ const ProfilePage = () => {
 						size='lg'
 						className='w-full'
 						onClick={() => handleLogout()}
+						disabled={isPending}
 					>
-						{isPending ? 'Выход...' : 'Log out'}
+						{isPending ? 'Please wait...' : 'Log out'}
 					</Button>
 				</div>
 			) : (

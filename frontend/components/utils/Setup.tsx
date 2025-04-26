@@ -11,6 +11,7 @@ export default function Setup() {
 			position='top-center'
 			autoClose={3000}
 			pauseOnHover={false}
+			style={{ width: '380px' }}
 		/>
 	)
 }

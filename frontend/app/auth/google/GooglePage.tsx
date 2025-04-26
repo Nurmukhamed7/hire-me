@@ -23,11 +23,11 @@ export default function GooglePage() {
 				await socialAuthenticate({ provider: 'google-oauth2', state, code })
 				await getUser()
 				setAuth()
-				toast.success('Logged in with Google in GooglePage')
+				toast.success('Logged In Successfully')
 				router.push('/')
 			} catch {
 				logout()
-				toast.error('Google login failed in GooglePage')
+				toast.error('Login failed. Please try again.')
 				router.push('/profile')
 			}
 		}
