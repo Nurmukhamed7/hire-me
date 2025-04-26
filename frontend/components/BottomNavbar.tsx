@@ -8,7 +8,7 @@ const BottomNavbar = () => {
 	const pathname = usePathname()
 
 	return (
-		<nav className='fixed bottom-2 left-0 right-0 bg-gray-800 max-w-[400px] mx-auto rounded-full py-3 px-7 flex justify-between'>
+		<nav className='fixed bottom-2 left-0 right-0 bg-primary max-w-[380px] mx-auto rounded-full py-3 px-7 flex justify-between'>
 			<Link
 				href='/'
 				className={`flex flex-col items-center text-xs gap-1 transition-colors ${

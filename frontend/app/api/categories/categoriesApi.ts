@@ -24,8 +24,7 @@ export const useServices = (categoryId: number | null) => {
 	return useQuery({
 		queryKey: ['services', categoryId],
 		queryFn: () => fetchServices(categoryId!),
-		enabled: !!categoryId, // Only fetch when categoryId is available
-		// staleTime: 5 * 60 * 1000, // Cache data for 5 minutes
+		enabled: !!categoryId,
 	})
 }
 
@@ -38,5 +37,17 @@ export const useWorksBySlug = (slug: string) => {
 	return useQuery({
 		queryKey: ['works', slug],
 		queryFn: () => fetchWorksBySlug(slug),
+	})
+}
+
+export const fetchSpecialistsBySlug = async (slug: string) => {
+	const { data } = await axiosInstance.get(`/api/specialists?slug=${slug}`)
+	return data
+}
+
+export const useSpecialistsBySlug = (slug: string) => {
+	return useQuery({
+		queryKey: ['specialists', slug],
+		queryFn: () => fetchSpecialistsBySlug(slug),
 	})
 }

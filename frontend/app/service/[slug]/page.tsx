@@ -1,10 +1,7 @@
-import { fetchWorksBySlug } from '@/app/api/categories/categoriesApi'
-import {
-	dehydrate,
-	HydrationBoundary,
-	QueryClient,
-} from '@tanstack/react-query'
-import ClientComponent from './ClientComponent'
+import { fetchSpecialistsBySlug } from '@/app/api/categories/categoriesApi'
+import { getQueryClient } from '@/lib/get-query-client'
+import { dehydrate, HydrationBoundary } from '@tanstack/react-query'
+import SpecialistList from './SpecialistList'
 
 interface Props {
 	params: Promise<{ slug: string }>
@@ -13,16 +10,19 @@ interface Props {
 const ServicePage = async ({ params }: Props) => {
 	const { slug } = await params
 
-	const queryClient = new QueryClient()
+	const queryClient = getQueryClient()
+
 	await queryClient.prefetchQuery({
-		queryKey: ['works', slug],
-		queryFn: () => fetchWorksBySlug(slug),
+		queryKey: ['specialists', slug],
+		queryFn: () => fetchSpecialistsBySlug(slug),
 	})
 
 	return (
-		<HydrationBoundary state={dehydrate(queryClient)}>
-			<ClientComponent slug={slug} />
-		</HydrationBoundary>
+		<>
+			<HydrationBoundary state={dehydrate(queryClient)}>
+				<SpecialistList slug={slug} />
+			</HydrationBoundary>
+		</>
 	)
 }
 
