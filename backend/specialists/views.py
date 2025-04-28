@@ -11,10 +11,9 @@ from services.models import Work
 
 
 class SpecialistsViewSet(ModelViewSet):
-    queryset = Specialist.objects.all()
+    queryset = Specialist.objects.select_related('user').all()
     serializer_class = SpecialistSerializer
     permission_classes = [IsAuthenticated] # only GET Specialists
-
     def get_permissions(self): # only GET Specialists
         if self.request.method == 'GET':
             return [AllowAny()]
@@ -45,10 +44,11 @@ class SpecialistsViewSet(ModelViewSet):
 
     @action(detail=False, methods=['GET', 'PUT'])
     def me(self, request):
+        print('--------queryset->', self.queryset)
         if not request.user.is_authenticated:
             raise NotAuthenticated("Authentication credentials were not provided.")
 
-        (specialists, created) = Specialist.objects.get_or_create(user_id=request.user.id)
+        (specialists, created) = Specialist.objects.select_related('user').get_or_create(user_id=request.user.id)
         if request.method == 'GET':
             serializer = SpecialistSerializer(specialists)
             return Response(serializer.data)
