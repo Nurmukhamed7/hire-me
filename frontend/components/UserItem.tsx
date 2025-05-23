@@ -92,7 +92,7 @@ export default function UserItem({
 						style={{
 							alignItems: 'center',
 							backgroundColor: avatarBackgroundColor,
-							backgroundImage: `url(${avatarUrl})`,
+							backgroundImage: avatarUrl ? `url(${avatarUrl})` : 'none',
 							backgroundSize: 'cover',
 							borderRadius: squared ? '' : '100px',
 							color: 'white',
